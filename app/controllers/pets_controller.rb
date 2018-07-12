@@ -32,7 +32,7 @@ class PetsController < ApplicationController
     binding.pry
     @pet = Pet.find(params[:id])
     @pet.update(params["pet"])
-    if !params["owner"]["name"].empty?
+    if Owner.find_by_id(params[:pet][:owner_id])
       @pet.owner = Owner.find_or_create_by(name: params["owner"]["name"])
     end
     redirect to "pets/#{@pet.id}"
